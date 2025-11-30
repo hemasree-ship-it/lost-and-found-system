@@ -53,40 +53,28 @@ function addItem(){
         return;
     }
 
-    // If user uploaded an image
-    if(imageInput.files[0]){
-        const reader = new FileReader();
-        reader.onload = function(){
-            const newItem = {
-                title,
-                type,
-                category,
-                date,
-                location,
-                contact,
-                image: reader.result
-            };
-            items.push(newItem);
-            saveItems();
-            renderItems();
-            document.querySelector(".form").reset();
-        }
-        reader.readAsDataURL(imageInput.files[0]);
-    } else {
-        // No image → use default
+    const addNewItem = (imgSrc) => {
         const newItem = {
-            title,
-            type,
-            category,
-            date,
-            location,
-            contact,
-            image: defaultImg
+            title, type, category, date, location, contact,
+            image: imgSrc
         };
         items.push(newItem);
         saveItems();
         renderItems();
+
+        // Reset form AFTER item added
         document.querySelector(".form").reset();
+    };
+
+    if(imageInput.files[0]){
+        const file = imageInput.files[0]; // use local var to avoid race
+        const reader = new FileReader();
+        reader.onload = function(){
+            addNewItem(reader.result);
+        }
+        reader.readAsDataURL(file);
+    } else {
+        addNewItem(defaultImg);
     }
 }
 
@@ -115,4 +103,5 @@ function filterItems(){
 
 // Initial render
 renderItems();
+
 
