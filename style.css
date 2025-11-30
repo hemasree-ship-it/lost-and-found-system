@@ -84,4 +84,13 @@ nav ul li a {
 nav ul li a:hover {
   color: #00ccff;
 }
+button {
+    color: white;
+    background: #333;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    border: 3px solid #fff;
+    cursor: pointer;
+}
+
 
