@@ -1,139 +1,125 @@
+/* Pixel font */
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f0f0f0;
+    font-family: 'Press Start 2P', cursive;
+    background: #87ceeb; /* sky-blue Minecraft style */
     margin: 0; padding: 0;
 }
+
+/* Header */
 header {
-    background: #4a90e2;
-    color: white;
-    padding: 1rem;
+    background: #4d4d4d;
+    color: #fff;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+    padding: 1rem;
+    font-size: 1rem;
+    border-bottom: 5px solid #222;
+    text-shadow: 2px 2px #000;
 }
+
+/* Container */
 .container {
-    padding: 2rem;
     max-width: 1000px;
-    margin: auto;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: repeating-linear-gradient(
+        45deg,
+        #a8e6cf,
+        #a8e6cf 20px,
+        #dcedc1 20px,
+        #dcedc1 40px
+    );
+    border: 5px solid #555;
 }
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.filters input, .filters select {
+    flex: 1;
+    padding: 0.5rem;
+    border: 3px solid #555;
+    background: #fff2a8;
+    border-radius: 0;
+}
+
+/* Form */
 .form-group {
     margin-bottom: 1rem;
 }
 input, select {
     width: 100%;
     padding: 0.5rem;
-    font-size: 1rem;
-    margin-top: 0.3rem;
+    border: 3px solid #555;
+    border-radius: 0;
+    background: #fff2a8;
+    font-size: 0.7rem;
 }
-button {
-    background: #4a90e2;
-    color: white;
-    padding: 0.7rem 1.2rem;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-button:hover { background: #357ABD; }
 
+/* Button Minecraft style */
+button {
+    font-family: 'Press Start 2P', cursive;
+    background: #ffcc00;
+    color: #333;
+    border: 3px solid #555;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    box-shadow: 4px 4px #888;
+    transition: all 0.2s;
+}
+button:hover {
+    transform: translateY(2px);
+    box-shadow: 2px 2px #555;
+}
+
+/* Cards */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-.card {
-    background: white;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-.card:hover { transform: scale(1.02); }
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-.card h3 {
-    margin: 0.5rem 0 0.2rem;
-}
-.card p {
-    margin: 0.2rem 0;
-    font-size: 0.9rem;
-    color: #333;
-}
-
-.filters {
-    display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-}
-.filters input, .filters select {
-    flex: 1;
 }
 
-/* Pixel/Minecraft font */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-body {
-    font-family: 'Press Start 2P', cursive;
-    background: #a3d9ff; /* Sky blue Minecraft vibe */
-}
-
-/* Pixel blocks in background */
-.container {
-    padding: 2rem;
-    max-width: 1000px;
-    margin: auto;
-    background: repeating-linear-gradient(
-        45deg,
-        #c2f0c2,
-        #c2f0c2 20px,
-        #a0d0a0 20px,
-        #a0d0a0 40px
-    );
-    border: 5px solid #555; /* pixelated border */
-    border-radius: 12px;
-}
-
-/* Cards: pixel block style */
 .card {
-    background: #f9f0a6; /* Minecraft yellow block */
-    border: 3px solid #555; /* dark pixel border */
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 5px 5px #888; /* blocky shadow */
-    transition: transform 0.2s;
+    background: #f4d03f; /* Minecraft block color */
+    border: 3px solid #555;
+    padding: 0.7rem;
+    box-shadow: 5px 5px #888;
     opacity: 0;
+    transition: transform 0.2s;
 }
+
+/* Pop animation */
 .card.show {
     animation: pop 0.5s forwards;
 }
+
 .card:hover {
     transform: scale(1.05);
 }
 
-/* Image hover */
+/* Card content */
 .card img {
+    width: 100%;
+    height: 180px;
     border: 2px solid #555;
-    border-radius: 4px;
+    object-fit: cover;
     transition: transform 0.3s;
 }
 .card:hover img {
     transform: scale(1.1);
 }
 
-/* Pop animation for Minecraft blocks */
+.card h3, .card p {
+    margin: 0.3rem 0;
+    font-size: 0.7rem;
+}
+
+/* Pop animation */
 @keyframes pop {
     0% { transform: scale(0.5); opacity: 0; }
     70% { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); }
 }
-
-/* Buttons: Minecrafty blocky look */
-button {
-    font-family: 'Press Start 2P', cursive;
-    background: #f
-
