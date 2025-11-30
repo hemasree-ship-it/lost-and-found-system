@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost & Found System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Lost & Found Portal</h1>
+
+    <div class="form-box">
+        <h2>Add Item</h2>
+        <input id="itemName" placeholder="Item name">
+        <input id="place" placeholder="Lost/Found place">
+        <input id="contact" placeholder="Contact">
+        <button onclick="addItem()">Add</button>
+    </div>
+
+    <h2>All Items</h2>
+    <div id="list"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
