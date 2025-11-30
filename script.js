@@ -38,7 +38,7 @@ function renderItems(filteredItems = null){
     });
 }
 
-// Add new item
+// Add new item (fixed image upload)
 function addItem(){
     const title = document.getElementById("title").value;
     const type = document.getElementById("type").value;
@@ -53,8 +53,27 @@ function addItem(){
         return;
     }
 
-    const reader = new FileReader();
-    reader.onload = function(){
+    // If user uploaded an image
+    if(imageInput.files[0]){
+        const reader = new FileReader();
+        reader.onload = function(){
+            const newItem = {
+                title,
+                type,
+                category,
+                date,
+                location,
+                contact,
+                image: reader.result
+            };
+            items.push(newItem);
+            saveItems();
+            renderItems();
+            document.querySelector(".form").reset();
+        }
+        reader.readAsDataURL(imageInput.files[0]);
+    } else {
+        // No image → use default
         const newItem = {
             title,
             type,
@@ -62,18 +81,12 @@ function addItem(){
             date,
             location,
             contact,
-            image: reader.result || defaultImg
+            image: defaultImg
         };
         items.push(newItem);
         saveItems();
         renderItems();
         document.querySelector(".form").reset();
-    }
-    
-    if(imageInput.files[0]){
-        reader.readAsDataURL(imageInput.files[0]);
-    } else {
-        reader.onload();
     }
 }
 
@@ -102,3 +115,4 @@ function filterItems(){
 
 // Initial render
 renderItems();
+
