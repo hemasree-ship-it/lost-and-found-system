@@ -41,11 +41,7 @@ function renderItems(filteredItems = null){
 // Add new item (fixed image upload)
 function addItem(){
     const title = document.getElementById("title").value;
-    const type = document.getElementById("type").value;
-    const category = document.getElementById("category").value;
-    const date = document.getElementById("date").value;
-    const location = document.getElementById("location").value;
-    const contact = document.getElementById("contact").value;
+    /* other fields... */
     const imageInput = document.getElementById("image");
 
     if(!title || !location || !contact){
@@ -53,28 +49,24 @@ function addItem(){
         return;
     }
 
-    const addNewItem = (imgSrc) => {
-        const newItem = {
-            title, type, category, date, location, contact,
-            image: imgSrc
-        };
+    const handleNewItem = (imgSrc) => {
+        const newItem = { title, type, category, date, location, contact, image: imgSrc };
         items.push(newItem);
         saveItems();
         renderItems();
-
-        // Reset form AFTER item added
         document.querySelector(".form").reset();
+        imageInput.value = ""; // <-- clear file input
     };
 
-    if(imageInput.files[0]){
-        const file = imageInput.files[0]; // use local var to avoid race
+    if(imageInput.files && imageInput.files[0]){
+        const file = imageInput.files[0];
         const reader = new FileReader();
         reader.onload = function(){
-            addNewItem(reader.result);
-        }
+            handleNewItem(reader.result);
+        };
         reader.readAsDataURL(file);
     } else {
-        addNewItem(defaultImg);
+        handleNewItem(defaultImg);
     }
 }
 
@@ -103,5 +95,6 @@ function filterItems(){
 
 // Initial render
 renderItems();
+
 
 
