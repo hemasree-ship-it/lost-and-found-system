@@ -1,6 +1,4 @@
-const btn = document.getElementById("addItemBtn");
-
-btn.addEventListener("click", function () {
+document.getElementById("addItemBtn").addEventListener("click", function () {
   const container = document.getElementById("cardContainer");
 
   const card = document.createElement("div");
@@ -14,3 +12,5 @@ btn.addEventListener("click", function () {
 
   container.appendChild(card);
 });
+
+
