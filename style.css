@@ -1,58 +1,76 @@
 body {
-  background: #1a1a1a;
-  color: white;
-  font-family: 'Press Start 2P', cursive;
-  padding: 20px;
-  text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: #f0f0f0;
+    margin: 0; padding: 0;
 }
-
-.title {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #00ff88;
-  text-shadow: 2px 2px #000;
+header {
+    background: #4a90e2;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
-
-.pixel-btn {
-  padding: 12px 20px;
-  background: #00ccff;
-  border: 4px solid #fff;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Press Start 2P';
-  margin-bottom: 20px;
-}
-
-.pixel-btn:hover {
-  background: #0099cc;
-}
-
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 600px;
-  margin: auto;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
 }
+.form-group {
+    margin-bottom: 1rem;
+}
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+}
+button {
+    background: #4a90e2;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+button:hover { background: #357ABD; }
 
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
 .card {
-  background: #333;
-  border: 4px solid #00ff88;
-  padding: 15px;
-  width: 100%;
-  text-align: left;
-  word-wrap: break-word;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+.card:hover { transform: scale(1.02); }
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.card h3 {
+    margin: 0.5rem 0 0.2rem;
+}
+.card p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+    color: #333;
 }
 
-/* Ensure card text is editable and clickable */
-.card * {
-  pointer-events: auto !important;
+.filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.filters input, .filters select {
+    flex: 1;
 }
 
-.card [contenteditable] {
-  background: #2b2b2b;
-  padding: 2px 4px;
-  outline: 1px dashed #00ff88;
-  caret-color: #ffffff;
-}
