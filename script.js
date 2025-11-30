@@ -1,40 +1,16 @@
-let items = JSON.parse(localStorage.getItem("items")) || [];
+// This makes the "Add New Item" button create a new card
+document.querySelector('button').addEventListener('click', function() {
+    const container = document.querySelector('.container');
 
-function addItem() {
-    let name = document.getElementById("itemName").value;
-    let place = document.getElementById("place").value;
-    let contact = document.getElementById("contact").value;
+    // Create a new card
+    const newCard = document.createElement('div');
+    newCard.className = 'card';
+    newCard.innerHTML = `
+        <h3>Lost: <span style="color:#ffcc00;">New Item</span></h3>
+        <p>Location: <span style="color:#00ccff;">Unknown</span></p>
+        <p>Contact: 000-000-0000</span></p>
+    `;
 
-    if (!name || !place || !contact) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    let item = {
-        name: name,
-        place: place,
-        contact: contact
-    };
-
-    items.push(item);
-    localStorage.setItem("items", JSON.stringify(items));
-
-    displayItems();
-}
-
-function displayItems() {
-    let list = document.getElementById("list");
-    list.innerHTML = "";
-
-    items.forEach((item, i) => {
-        list.innerHTML += `
-            <div class="item">
-                <h3>${item.name}</h3>
-                <p>Place: ${item.place}</p>
-                <p>Contact: ${item.contact}</p>
-            </div>
-        `;
-    });
-}
-
-displayItems();
+    // Add it to the page
+    container.appendChild(newCard);
+});
