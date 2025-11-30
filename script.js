@@ -1,13 +1,15 @@
-document.getElementById("addItemBtn").addEventListener("click", function() {
-    const container = document.querySelector('.container');
+document.getElementById("addItemBtn").addEventListener("click", function () {
+    const container = document.getElementById("cardContainer");
 
-    const newCard = document.createElement('div');
-    newCard.className = 'card';
-    newCard.innerHTML = `
-        <h3 contenteditable="true">Lost: <span style="color:#ffcc00;">New Item</span></h3>
-        <p contenteditable="true">Location: <span style="color:#00ccff;">Unknown</span></p>
-        <p contenteditable="true">Contact: 000-000-0000</p>
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+        <h3 contenteditable="true">Lost: <span contenteditable="true" style="color:#ffcc00;">New Item</span></h3>
+        <p contenteditable="true">Location: <span contenteditable="true" style="color:#00ccff;">Unknown</span></p>
+        <p contenteditable="true">Contact: <span contenteditable="true">000-000-0000</span></p>
     `;
 
-    container.appendChild(newCard);
+    container.appendChild(card);
 });
+
