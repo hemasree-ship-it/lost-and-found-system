@@ -1,28 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<title>Lost & Found System</title>
-
-    <title>Lost & Found System</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Lost & Found Portal</h1>
 
-    <div class="form-box">
-        <h2>Add Item</h2>
-        <input id="itemName" placeholder="Item name">
-        <input id="place" placeholder="Lost/Found place">
-        <input id="contact" placeholder="Contact">
-        <button onclick="addItem()">Add</button>
-    </div>
+<div class="container">
+  <h1>Lost & Found Portal</h1>
 
-    <h2>All Items</h2>
-    <div id="list"></div>
+  <!-- Example Item Cards -->
+  <div class="card">
+    <h3>Lost: <span style="color:#ff6666;">Diamond Sword</span></h3>
+    <p>Location: <span style="color:#00ccff;">Library</span></p>
+    <p>Contact: 999-999-9999</p>
+  </div>
 
-    <script src="script.js"></script>
+  <div class="card">
+    <h3>Found: <span style="color:#ffcc00;">Pixel Backpack</span></h3>
+    <p>Location: <span style="color:#00ccff;">Cafeteria</span></p>
+    <p>Contact: 888-888-8888</p>
+  </div>
+
+  <!-- Add more cards dynamically with JS if needed -->
+
+  <button>Add New Item</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
