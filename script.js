@@ -1,6 +1,6 @@
 const defaultImg = "https://i.imgur.com/OaH1q1F.png"; // pixel treasure box
 
-// Load existing items from localStorage or empty array
+// Load existing items from localStorage
 let items = JSON.parse(localStorage.getItem("lostFoundItems")) || [];
 
 // Mask phone numbers like 987****321
@@ -16,14 +16,15 @@ function saveItems(){
     localStorage.setItem("lostFoundItems", JSON.stringify(items));
 }
 
-// Render items/cards on page
+// Render items/cards
 function renderItems(filteredItems = null){
     const displayItems = filteredItems || items;
     const cardsDiv = document.getElementById("cards");
     cardsDiv.innerHTML = "";
+
     displayItems.forEach(item => {
         const card = document.createElement("div");
-        card.className = "card show"; // show class triggers pop animation
+        card.className = "card show"; // triggers pop animation
         card.innerHTML = `
             <img src="${item.image || defaultImg}" alt="Item Image">
             <h3>${item.title}</h3>
@@ -37,7 +38,7 @@ function renderItems(filteredItems = null){
     });
 }
 
-// Add new item from form
+// Add new item
 function addItem(){
     const title = document.getElementById("title").value;
     const type = document.getElementById("type").value;
@@ -55,7 +56,12 @@ function addItem(){
     const reader = new FileReader();
     reader.onload = function(){
         const newItem = {
-            title, type, category, date, location, contact,
+            title,
+            type,
+            category,
+            date,
+            location,
+            contact,
             image: reader.result || defaultImg
         };
         items.push(newItem);
@@ -63,6 +69,7 @@ function addItem(){
         renderItems();
         document.querySelector(".form").reset();
     }
+    
     if(imageInput.files[0]){
         reader.readAsDataURL(imageInput.files[0]);
     } else {
@@ -93,6 +100,5 @@ function filterItems(){
     renderItems(filtered);
 }
 
-// Initial render on page load
+// Initial render
 renderItems();
-
