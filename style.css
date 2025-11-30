@@ -1,20 +1,20 @@
 body {
   background: #1a1a1a;
-  color: #fff;
+  color: white;
   font-family: 'Press Start 2P', cursive;
   padding: 20px;
   text-align: center;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 20px;
   color: #00ff88;
   text-shadow: 2px 2px #000;
 }
 
 .pixel-btn {
-  padding: 10px 20px;
+  padding: 12px 20px;
   background: #00ccff;
   border: 4px solid #fff;
   font-size: 14px;
@@ -45,13 +45,14 @@ body {
   word-wrap: break-word;
 }
 
-/* ensure editing works — no pointer-blocking or weird overlays */
+/* Ensure card text is editable and clickable */
 .card * {
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 
 .card [contenteditable] {
   background: #2b2b2b;
   padding: 2px 4px;
   outline: 1px dashed #00ff88;
+  caret-color: #ffffff;
 }
