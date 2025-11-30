@@ -1,13 +1,14 @@
 /* Body */
 body {
   font-family: 'Press Start 2P', cursive;
-  background-color: #1e1e1e; /* dark night theme */
+  background-color: #1e1e1e; /* fallback dark background */
   color: #fff;
   margin: 0;
   padding: 0;
-  background-image: url('pixel-bg.png'); /* optional pixel bg pattern */
-  background-repeat: repeat;
+  background-image: url('pixel-bg.png'); /* pixel pattern image */
+  background-repeat: repeat; /* repeat the small image across screen */
 }
+
 
 /* Container */
 .container {
@@ -83,3 +84,4 @@ nav ul li a {
 nav ul li a:hover {
   color: #00ccff;
 }
+
