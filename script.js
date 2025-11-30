@@ -1,7 +1,9 @@
 const defaultImg = "https://i.imgur.com/OaH1q1F.png"; // pixel treasure box
 
+// Load existing items from localStorage or empty array
 let items = JSON.parse(localStorage.getItem("lostFoundItems")) || [];
 
+// Mask phone numbers like 987****321
 function maskContact(contact){
     if(contact.length >= 6){
         return contact.slice(0,3) + "****" + contact.slice(-3);
@@ -9,17 +11,19 @@ function maskContact(contact){
     return contact;
 }
 
+// Save items to localStorage
 function saveItems(){
     localStorage.setItem("lostFoundItems", JSON.stringify(items));
 }
 
+// Render items/cards on page
 function renderItems(filteredItems = null){
     const displayItems = filteredItems || items;
     const cardsDiv = document.getElementById("cards");
     cardsDiv.innerHTML = "";
     displayItems.forEach(item => {
         const card = document.createElement("div");
-        card.className = "card";
+        card.className = "card show"; // show class triggers pop animation
         card.innerHTML = `
             <img src="${item.image || defaultImg}" alt="Item Image">
             <h3>${item.title}</h3>
@@ -33,6 +37,7 @@ function renderItems(filteredItems = null){
     });
 }
 
+// Add new item from form
 function addItem(){
     const title = document.getElementById("title").value;
     const type = document.getElementById("type").value;
@@ -88,5 +93,6 @@ function filterItems(){
     renderItems(filtered);
 }
 
-// Initial render
+// Initial render on page load
 renderItems();
+
