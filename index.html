@@ -1,85 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lost & Found System - Minecraft Style</title>
-
-<!-- Pixel/Minecraft font -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Lost & Found – Minecraft Style</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<header>🏰 LOST & FOUND 🏰</header>
+    <h1 class="title">Minecraft Lost & Found</h1>
 
-<div class="container">
+    <button id="addBtn" class="block-btn">+ Add New Item</button>
 
-  <!-- Filters -->
-  <div class="filters">
-      <input type="text" id="search" placeholder="Search by title...">
-      <select id="filterType">
-          <option value="">All Types</option>
-          <option value="Lost">Lost</option>
-          <option value="Found">Found</option>
-      </select>
-      <select id="filterCategory">
-          <option value="">All Categories</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Books">Books</option>
-          <option value="Other">Other</option>
-      </select>
-      <input type="date" id="filterDate">
-  </div>
+    <div class="container" id="itemContainer"></div>
 
-  <!-- Add Item Form -->
-  <div class="form">
-      <div class="form-group">
-          <label>Item Name</label>
-          <input type="text" id="title" placeholder="Enter item name">
-      </div>
-      <div class="form-group">
-          <label>Type</label>
-          <select id="type">
-              <option value="Lost">Lost</option>
-              <option value="Found">Found</option>
-          </select>
-      </div>
-      <div class="form-group">
-          <label>Category</label>
-          <select id="category">
-              <option value="Electronics">Electronics</option>
-              <option value="Clothing">Clothing</option>
-              <option value="Books">Books</option>
-              <option value="Other">Other</option>
-          </select>
-      </div>
-      <div class="form-group">
-          <label>Date</label>
-          <input type="date" id="date">
-      </div>
-      <div class="form-group">
-          <label>Location</label>
-          <input type="text" id="location" placeholder="Enter location">
-      </div>
-      <div class="form-group">
-          <label>Contact</label>
-          <input type="text" id="contact" placeholder="Enter phone number">
-      </div>
-      <div class="form-group">
-          <label>Image</label>
-          <input type="file" id="image">
-      </div>
-      <button onclick="addItem()">Add Item</button>
-  </div>
+    <!-- Popup -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-box">
+            <h2 class="popup-title">Item Details</h2>
 
-  <!-- Cards -->
-  <div class="cards" id="cards"></div>
+            <label>Lost Item Name:</label>
+            <input id="pName" type="text" class="input-block">
 
-</div>
+            <label>Location:</label>
+            <input id="pLocation" type="text" class="input-block">
 
-<script src="script.js"></script>
+            <label>Contact:</label>
+            <input id="pContact" type="text" class="input-block">
+
+            <button id="saveBtn" class="block-btn">Save</button>
+            <button id="closeBtn" class="block-btn red">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
