@@ -1,40 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lost & Found – Minecraft Style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found - Minecraft Style</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <div class="title">🪓 Lost & Found Board</div>
 
-    <h1 class="title">Minecraft Lost & Found</h1>
-
-    <button id="addBtn" class="block-btn">+ Add New Item</button>
-
-    <div class="container" id="itemContainer"></div>
-
-    <!-- Popup -->
-    <div id="popup" class="popup hidden">
-        <div class="popup-box">
-            <h2 class="popup-title">Item Details</h2>
-
-            <label>Lost Item Name:</label>
-            <input id="pName" type="text" class="input-block">
-
-            <label>Location:</label>
-            <input id="pLocation" type="text" class="input-block">
-
-            <label>Contact:</label>
-            <input id="pContact" type="text" class="input-block">
-
-            <button id="saveBtn" class="block-btn">Save</button>
-            <button id="closeBtn" class="block-btn red">Close</button>
-        </div>
+    <div class="form-box">
+        <select id="typeSelect">
+            <option value="lost">Lost Item</option>
+            <option value="found">Found Item</option>
+        </select>
+        <input type="text" id="itemName" placeholder="Item Name">
+        <input type="text" id="location" placeholder="Location">
+        <input type="text" id="contact" placeholder="Contact Info">
+        <button onclick="addItem()">Add Entry</button>
     </div>
+
+    <div id="board" class="board"></div>
 
     <script src="script.js"></script>
 </body>
