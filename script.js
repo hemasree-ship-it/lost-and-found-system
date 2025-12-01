@@ -1,100 +1,74 @@
-const defaultImg = "https://i.imgur.com/OaH1q1F.png"; // pixel treasure box
+let items = JSON.parse(localStorage.getItem("items")) || [];
+let currentIndex = null;
 
-// Load existing items from localStorage
-let items = JSON.parse(localStorage.getItem("lostFoundItems")) || [];
+const addBtn = document.getElementById("addBtn");
+const container = document.getElementById("itemContainer");
+const popup = document.getElementById("popup");
 
-// Mask phone numbers like 987****321
-function maskContact(contact){
-    if(contact.length >= 6){
-        return contact.slice(0,3) + "****" + contact.slice(-3);
-    }
-    return contact;
-}
+// inputs
+const pName = document.getElementById("pName");
+const pLocation = document.getElementById("pLocation");
+const pContact = document.getElementById("pContact");
 
-// Save items to localStorage
-function saveItems(){
-    localStorage.setItem("lostFoundItems", JSON.stringify(items));
-}
+document.getElementById("saveBtn").onclick = saveItem;
+document.getElementById("closeBtn").onclick = () => popup.classList.add("hidden");
 
-// Render items/cards
-function renderItems(filteredItems = null){
-    const displayItems = filteredItems || items;
-    const cardsDiv = document.getElementById("cards");
-    cardsDiv.innerHTML = "";
-
-    displayItems.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card show"; // triggers pop animation
-        card.innerHTML = `
-            <img src="${item.image || defaultImg}" alt="Item Image">
-            <h3>${item.title}</h3>
-            <p><strong>Type:</strong> ${item.type}</p>
-            <p><strong>Category:</strong> ${item.category}</p>
-            <p><strong>Date:</strong> ${item.date}</p>
-            <p><strong>Location:</strong> ${item.location}</p>
-            <p><strong>Contact:</strong> ${maskContact(item.contact)}</p>
-        `;
-        cardsDiv.appendChild(card);
-    });
-}
-
-// Add new item (fixed image upload)
-function addItem(){
-    const title = document.getElementById("title").value;
-    /* other fields... */
-    const imageInput = document.getElementById("image");
-
-    if(!title || !location || !contact){
-        alert("Please fill Title, Location & Contact!");
-        return;
-    }
-
-    const handleNewItem = (imgSrc) => {
-        const newItem = { title, type, category, date, location, contact, image: imgSrc };
-        items.push(newItem);
-        saveItems();
-        renderItems();
-        document.querySelector(".form").reset();
-        imageInput.value = ""; // <-- clear file input
-    };
-
-    if(imageInput.files && imageInput.files[0]){
-        const file = imageInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(){
-            handleNewItem(reader.result);
-        };
-        reader.readAsDataURL(file);
-    } else {
-        handleNewItem(defaultImg);
-    }
-}
-
-// Filters & Search
-document.getElementById("search").addEventListener("input", filterItems);
-document.getElementById("filterType").addEventListener("change", filterItems);
-document.getElementById("filterCategory").addEventListener("change", filterItems);
-document.getElementById("filterDate").addEventListener("change", filterItems);
-
-function filterItems(){
-    const keyword = document.getElementById("search").value.toLowerCase();
-    const typeFilter = document.getElementById("filterType").value;
-    const categoryFilter = document.getElementById("filterCategory").value;
-    const dateFilter = document.getElementById("filterDate").value;
-
-    const filtered = items.filter(item => {
-        return (
-            item.title.toLowerCase().includes(keyword) &&
-            (typeFilter === "" || item.type === typeFilter) &&
-            (categoryFilter === "" || item.category === categoryFilter) &&
-            (dateFilter === "" || item.date === dateFilter)
-        );
-    });
-    renderItems(filtered);
-}
-
-// Initial render
+// Load existing items
 renderItems();
 
+// ADD NEW
+addBtn.onclick = () => {
+    currentIndex = null; // new item
+    pName.value = "";
+    pLocation.value = "";
+    pContact.value = "";
+    popup.classList.remove("hidden");
+};
 
+// SAVE ITEM
+function saveItem() {
+    const obj = {
+        name: pName.value,
+        location: pLocation.value,
+        contact: pContact.value
+    };
 
+    if (currentIndex === null) {
+        items.push(obj); // new
+    } else {
+        items[currentIndex] = obj; // edit
+    }
+
+    localStorage.setItem("items", JSON.stringify(items));
+
+    popup.classList.add("hidden");
+    renderItems();
+}
+
+// SHOW CARDS
+function renderItems() {
+    container.innerHTML = "";
+
+    items.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <h3>Lost: <span style="color:#ffcc00;">${item.name}</span></h3>
+            <p>Location: <span style="color:#00ccff;">${item.location}</span></p>
+            <p>Contact: ${item.contact}</p>
+        `;
+
+        card.onclick = () => openPopup(index);
+        container.appendChild(card);
+    });
+}
+
+// OPEN POPUP TO EDIT
+function openPopup(i) {
+    currentIndex = i;
+    pName.value = items[i].name;
+    pLocation.value = items[i].location;
+    pContact.value = items[i].contact;
+    popup.classList.remove("hidden");
+}
