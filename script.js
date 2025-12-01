@@ -1,74 +1,59 @@
-let items = JSON.parse(localStorage.getItem("items")) || [];
-let currentIndex = null;
+// Load saved items from localStorage
+let items = JSON.parse(localStorage.getItem('lostFoundItems')) || [];
 
-const addBtn = document.getElementById("addBtn");
-const container = document.getElementById("itemContainer");
-const popup = document.getElementById("popup");
+function saveItem(e) {
+    e.preventDefault();
 
-// inputs
-const pName = document.getElementById("pName");
-const pLocation = document.getElementById("pLocation");
-const pContact = document.getElementById("pContact");
+    const name = document.getElementById('itemName').value;
+    const category = document.getElementById('itemCategory').value;
+    const desc = document.getElementById('itemDescription').value;
 
-document.getElementById("saveBtn").onclick = saveItem;
-document.getElementById("closeBtn").onclick = () => popup.classList.add("hidden");
-
-// Load existing items
-renderItems();
-
-// ADD NEW
-addBtn.onclick = () => {
-    currentIndex = null; // new item
-    pName.value = "";
-    pLocation.value = "";
-    pContact.value = "";
-    popup.classList.remove("hidden");
-};
-
-// SAVE ITEM
-function saveItem() {
-    const obj = {
-        name: pName.value,
-        location: pLocation.value,
-        contact: pContact.value
+    const newItem = {
+        id: Date.now(),
+        name,
+        category,
+        desc,
+        found: false,
+        finderDetails: null
     };
 
-    if (currentIndex === null) {
-        items.push(obj); // new
-    } else {
-        items[currentIndex] = obj; // edit
-    }
+    items.push(newItem);
+    localStorage.setItem('lostFoundItems', JSON.stringify(items));
 
-    localStorage.setItem("items", JSON.stringify(items));
-
-    popup.classList.add("hidden");
+    document.getElementById('itemForm').reset();
     renderItems();
 }
 
-// SHOW CARDS
-function renderItems() {
-    container.innerHTML = "";
+function markFound(id) {
+    const item = items.find(i => i.id === id);
 
-    items.forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
+    const finder = prompt("Enter your name (Finder):");
+    const contact = prompt("Enter your contact:");
+
+    item.found = true;
+    item.finderDetails = { finder, contact };
+
+    localStorage.setItem('lostFoundItems', JSON.stringify(items));
+    renderItems();
+}
+
+function renderItems() {
+    const board = document.getElementById('itemsBoard');
+    board.innerHTML = '';
+
+    items.forEach(i => {
+        const card = document.createElement('div');
+        card.className = 'card';
 
         card.innerHTML = `
-            <h3>Lost: <span style="color:#ffcc00;">${item.name}</span></h3>
-            <p>Location: <span style="color:#00ccff;">${item.location}</span></p>
-            <p>Contact: ${item.contact}</p>
+            <h3>${i.name}</h3>
+            <p><b>Category:</b> ${i.category}</p>
+            <p>${i.desc}</p>
+            ${i.found ? `<p style='color:lightgreen;'>FOUND ✔<br>By: ${i.finderDetails.finder}</p>` : `<button onclick="markFound(${i.id})">Mark as Found</button>`}
         `;
 
-        card.onclick = () => openPopup(index);
-        container.appendChild(card);
+        board.appendChild(card);
     });
 }
 
-// OPEN POPUP TO EDIT
-function openPopup(i) {
-    currentIndex = i;
-    pName.value = items[i].name;
-    pLocation.value = items[i].location;
-    pContact.value = items[i].contact;
-    popup.classList.remove("hidden");
-}
+renderItems();
