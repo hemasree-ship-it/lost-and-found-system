@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost & Found - Minecraft Style</title>
+    <title>Minecraft Lost & Found</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="title">🪓 Lost & Found Board</div>
+    <h1 class="title">🧱 Lost & Found Board</h1>
 
     <div class="form-box">
         <select id="typeSelect">
             <option value="lost">Lost Item</option>
             <option value="found">Found Item</option>
         </select>
+
         <input type="text" id="itemName" placeholder="Item Name">
+        <input type="text" id="category" placeholder="Category">
+        <input type="date" id="date">
         <input type="text" id="location" placeholder="Location">
-        <input type="text" id="contact" placeholder="Contact Info">
-        <button onclick="addItem()">Add Entry</button>
+        <input type="text" id="contact" placeholder="Contact Details">
+
+        <label class="img-label">Upload Image:</label>
+        <input type="file" id="imageInput" accept="image/*">
+
+        <button onclick="addItem()">Add Item</button>
     </div>
 
     <div id="board" class="board"></div>
@@ -25,3 +32,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
